@@ -31,10 +31,10 @@ dataSource.products = {
       },
     },
   },
-  set: {
-    name: 'Zestaw 2 (20 szt.)',
-    price: 45,
-    composition: '4x California (krab/majoner',
+  pizza: {
+    name: 'Nonna Alba\'s Pizza',
+    price: 20,
+    description: 'The true taste of Italy &ndash; homemade pizza as prepared by our grandmothers in old-fashoned brick ovens. Choose your favorite topping and enjoy your comfort food! All ingredients come straight from eco-friendly, trusted farms in the Italian countryside.',
     images: [
       '<img class="active" src="images/pizza/crust.svg">',
       '<img class="active sauce-tomato" src="images/pizza/tomato-sauce.svg">',
