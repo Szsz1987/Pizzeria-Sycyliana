@@ -61,8 +61,8 @@
       thisProduct.getElements();
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
-      thisProduct.processOrder();
       console.log('new Product:', thisProduct);
+      thisProduct.processOrder();
     }
     renderInMenu(){
       const thisProduct = this;
@@ -95,7 +95,6 @@
     
     initOrderForm(){
       const thisProduct = this;
-      console.log(this.initOrderForm);
       thisProduct.form.addEventListener('submit', function(event){
         event.preventDefault();
         thisProduct.processOrder();
@@ -115,8 +114,6 @@
       const thisProduct = this;
       const formData = utils.serializeFormToObject(thisProduct.form);
       console.log('formData', formData);
-
-      //set price to default price
       let price = thisProduct.data.price;
 
       // for every category (param)...
@@ -126,15 +123,28 @@
       for(let paramId in thisProduct.data.params){
         const param = thisProduct.data.params[paramId];
         console.log(paramId, param);
-          for(let optionId in param.options){
-            const option = param.options[optionId];
-            console.log(optionId, option);
+        for(let optionId in param.options){
+          const option = param.options[optionId];
+          console.log(optionId, option);
+
+          /*first I need to check that the formData object contains a property 
+          with the key paramId, and the value of this property is to be optionId*/
+          const firstCheck = formData.hasOwnProperty(paramId);
+          console.log(firstCheck);
+          console.log(formData[paramId].includes(optionId));
+          if(firstCheck == true && formData[paramId].includes(optionId)){
+            if(!option.default == true){
+              price += option.price;
+            }
+          } else if(option.default == true){
+              price -= option.price;
           }
         }
+      }
 
       //update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
-      
+
     }
   }
 
