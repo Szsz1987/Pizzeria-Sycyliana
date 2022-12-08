@@ -143,7 +143,7 @@
             if(optionSelected){
               image.classList.add(classNames.menuProduct.imageVisible);
             } else {
-              image.classList.remove(className.menuProduct.imageVisible);
+              image.classList.remove(classNames.menuProduct.imageVisible);
             }
           }
         }
