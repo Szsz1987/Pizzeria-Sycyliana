@@ -79,6 +79,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
     
     initAccordion(){
@@ -116,35 +117,38 @@
       console.log('formData', formData);
       let price = thisProduct.data.price;
 
-      // for every category (param)...
-      // determine param value, e.g. paramId = 'toppings', param = {label: 'Toppings', type: 'checkboxes'...}
-      // for every option in this category
-      // determine option value, e.g. optionId = 'olives', option = {label: 'Olives', price: 2, default: true}
       for(let paramId in thisProduct.data.params){
         const param = thisProduct.data.params[paramId];
-        console.log(paramId, param);
+
+
         for(let optionId in param.options){
           const option = param.options[optionId];
-          console.log(optionId, option);
-
-          /*first I need to check that the formData object contains a property 
-          with the key paramId, and the value of this property is to be optionId*/
           const firstCheck = formData.hasOwnProperty(paramId);
-          console.log(firstCheck);
-          console.log(formData[paramId].includes(optionId));
-          if(firstCheck == true && formData[paramId].includes(optionId)){
+          const optionSelected = firstCheck == true && formData[paramId].includes(optionId);
+          if(optionSelected){
             if(!option.default == true){
               price += option.price;
             }
           } else if(option.default == true){
-              price -= option.price;
+            price -= option.price;
+          }
+          
+          //find image with class ".paramId-optionId"
+          //check if it was found
+          //check if current option is "checked"
+          //if it is, give img class 'active'
+          //if it is not, remove class 'active' 
+          const image = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
+          if(image != null){
+            if(optionSelected){
+              image.classList.add(classNames.menuProduct.imageVisible);
+            } else {
+              image.classList.remove(className.menuProduct.imageVisible);
+            }
           }
         }
       }
-
-      //update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
-
     }
   }
 
