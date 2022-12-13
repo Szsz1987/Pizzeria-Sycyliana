@@ -62,12 +62,21 @@
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
       console.log('new Product:', thisProduct);
+      thisProduct.initAmountWidget();
       thisProduct.processOrder();
     }
+
+    initAmountWidget(){
+      const thisProduct = this;
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+    }
+
     renderInMenu(){
       const thisProduct = this;
       const generatedHTML = templates.menuProduct(thisProduct.data);
+      // === AmountWidget/constructor(element)
       thisProduct.element = utils.createDOMFromHTML(generatedHTML);
+      // === AmountWidget/constructor(element)
       const menuContainer = document.querySelector(select.containerOf.menu);
       menuContainer.appendChild(thisProduct.element);
     }
@@ -80,6 +89,7 @@
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
     
     initAccordion(){
@@ -114,7 +124,6 @@
     processOrder(){
       const thisProduct = this;
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData', formData);
       let price = thisProduct.data.price;
 
       for(let paramId in thisProduct.data.params){
@@ -150,18 +159,35 @@
     }
   }
 
-  const app = {
-    initData: function(){
-      const thisApp = this;
-      thisApp.data = dataSource;
-    },
+  class AmountWidget{
+    constructor(element){
+      const thisWidget = this;
+      thisWidget.getElements(element);
+      console.log('AmountWidget:', thisWidget);
+      console.log('constructor arguments:', element);
+    }
 
+    getElements(element){
+      const thisWidget = this;
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+      thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+      thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+    }
+  }
+
+  const app = {
     initMenu: function(){
       const thisApp = this;
       console.log('thisApp.data:', thisApp.data);
       for(let productData in thisApp.data.products){
         new Product (productData, thisApp.data.products[productData]);
       }
+    },
+
+    initData: function(){
+      const thisApp = this;
+      thisApp.data = dataSource;
     },
 
     init: function(){
