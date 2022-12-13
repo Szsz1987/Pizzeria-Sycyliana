@@ -120,11 +120,9 @@
       for(let paramId in thisProduct.data.params){
         const param = thisProduct.data.params[paramId];
 
-
         for(let optionId in param.options){
           const option = param.options[optionId];
-          const firstCheck = formData.hasOwnProperty(paramId);
-          const optionSelected = firstCheck == true && formData[paramId].includes(optionId);
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
           if(optionSelected){
             if(!option.default == true){
               price += option.price;
@@ -139,7 +137,7 @@
           //if it is, give img class 'active'
           //if it is not, remove class 'active' 
           const image = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
-          if(image != null){
+          if(image){
             if(optionSelected){
               image.classList.add(classNames.menuProduct.imageVisible);
             } else {
