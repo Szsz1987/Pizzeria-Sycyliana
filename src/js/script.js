@@ -40,13 +40,13 @@
     },
   };
 
-  /*const settings = {
+  const settings = {
     amountWidget: {
       defaultValue: 1,
       defaultMin: 1,
       defaultMax: 9,
     }
-  };*/
+  };
 
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
@@ -125,7 +125,6 @@
       const thisProduct = this;
       const formData = utils.serializeFormToObject(thisProduct.form);
       let price = thisProduct.data.price;
-
       for(let paramId in thisProduct.data.params){
         const param = thisProduct.data.params[paramId];
 
@@ -140,11 +139,6 @@
             price -= option.price;
           }
           
-          //find image with class ".paramId-optionId"
-          //check if it was found
-          //check if current option is "checked"
-          //if it is, give img class 'active'
-          //if it is not, remove class 'active' 
           const image = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
           if(image){
             if(optionSelected){
@@ -179,9 +173,7 @@
     setValue(value){
       const thisWidget = this;
       const newValue = parseInt(value);
-
-      /*ToDo: Add validation*/
-      if(thisWidget.value !== newValue && !isNaN(newValue)){
+      if(thisWidget.value !== newValue && !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin-1 && newValue <= settings.amountWidget.defaultMax+1){
         thisWidget.value = newValue;
       }
       thisWidget.input.value = thisWidget.value;
