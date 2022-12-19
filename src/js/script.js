@@ -69,6 +69,10 @@
     initAmountWidget(){
       const thisProduct = this;
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+      // thisProduct.amountWidgetElem === thisWidget.element  
+      thisProduct.amountWidgetElem.addEventListener('updated', function(){
+        thisProduct.processOrder();  
+      });
     }
 
     renderInMenu(){
@@ -149,6 +153,11 @@
           }
         }
       }
+
+      //multiply price by amount
+      price *= thisProduct.amountWidget.value;
+
+      //update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
     }
   }
@@ -157,15 +166,15 @@
     constructor(element){
       const thisWidget = this;
       thisWidget.getElements(element);
-      thisWidget.setValue(thisWidget.input.value);
+      thisWidget.setValue(settings.amountWidget.defaultValue);
       thisWidget.initActions();
-      console.log('AmountWidget:', thisWidget);
-      console.log('constructor arguments:', element);
+      console.log('AmountWidget', AmountWidget);
+      console.log('constructor arguments', element);
     }
 
     getElements(element){
       const thisWidget = this;
-      thisWidget.element = element;
+      thisWidget.element = element; // === thisProduct.amountWidgetElem
       thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
       thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
       thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
@@ -177,6 +186,7 @@
         thisWidget.value = newValue;
       }
       thisWidget.input.value = thisWidget.value;
+      thisWidget.announce();
     }
     initActions(){
       const thisWidget = this;
@@ -191,6 +201,12 @@
         event.preventDefault();
         thisWidget.setValue(thisWidget.value + 1);
       });
+    }
+    announce(){
+      const thisWidget = this;
+      const event = new Event('updated');
+      thisWidget.element.dispatchEvent(event);
+      //thisWidget.element === thisProduct.amountWidgetElem
     }
   }
 
