@@ -6,7 +6,7 @@
   const select = {						
     templateOf: {						
       menuProduct: '#template-menu-product',						
-      cartProduct: '#template-cart-product', // CODE ADDED						
+      cartProduct: '#template-cart-product', // szablon produktu w koszyku
     },						
     containerOf: {						
       menu: '#product-list',						
@@ -34,16 +34,16 @@
     },						
     // CODE ADDED START						
     cart: {						
-      productList: '.cart__order-summary',						
-      toggleTrigger: '.cart__summary',						
-      totalNumber: `.cart__total-number`,						
-      totalPrice: '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',						
-      subtotalPrice: '.cart__order-subtotal .cart__order-price-sum strong',						
-      deliveryFee: '.cart__order-delivery .cart__order-price-sum strong',						
-      form: '.cart__order',						
-      formSubmit: '.cart__order [type="submit"]',						
-      phone: '[name="phone"]',						
-      address: '[name="address"]',						
+      productList: '.cart__order-summary',		// ul	lista produktów w koszyku		
+      toggleTrigger: '.cart__summary',		    // div treść: 0 - Total price - $ - 0				
+      totalNumber: `.cart__total-number`,			// span treść: 0 (przed Total price)		
+      totalPrice: '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong', // pogrubienia w belce i koszyku
+      subtotalPrice: '.cart__order-subtotal .cart__order-price-sum strong',				// li i span w Subtotal		
+      deliveryFee: '.cart__order-delivery . cart__order-price-sum strong',			 // li i span w Delivery			
+      form: '.cart__order',				// form od początku listy produktów w koszyku po przycisk order		
+      formSubmit: '.cart__order [type="submit"]', // button w koszyku				
+      phone: '[name="phone"]',				// input phone		
+      address: '[name="address"]',	  // input address 
     },						
     cartProduct: {						
       amountWidget: '.widget-amount',						
@@ -95,7 +95,7 @@
       thisProduct.getElements();
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
-      console.log('new Product:', thisProduct);
+      console.log('new Product 3 ', thisProduct);
       thisProduct.initAmountWidget();
       thisProduct.processOrder();
     }
@@ -157,6 +157,7 @@
       thisProduct.cartButton.addEventListener('click', function(event){
         event.preventDefault();
         thisProduct.processOrder();
+        thisProduct.addToCart();
       });
     }
 
@@ -195,6 +196,11 @@
       //update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
     }
+
+    addToCart(){
+      const thisProduct = this;
+      app.cart.add(thisProduct); // w app.cart zapisaliśmy instancję klasy Cart
+    }
   }
 
   class AmountWidget{
@@ -203,8 +209,8 @@
       thisWidget.getElements(element);
       thisWidget.setValue(settings.amountWidget.defaultValue);
       thisWidget.initActions();
-      console.log('AmountWidget', AmountWidget);
-      console.log('constructor arguments', element);
+      console.log('AmountWidget 4 ', AmountWidget);
+      console.log('AmountWidgetconstructor arguments 5 ', element);
     }
 
     getElements(element){
@@ -251,14 +257,14 @@
       thisCart.products = [];
       thisCart.getElements(element);
       thisCart.initActions();
-      console.log('new Cart', thisCart);
+      console.log('new Cart 6 ', thisCart);
     }
 
     getElements(element){
-      const thisCart=this;
+      const thisCart = this;
       thisCart.dom = {};
       thisCart.dom.wrapper = element;
-      thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger); //short bar in the header
     }
 
     initActions(){
@@ -267,6 +273,11 @@
         event.preventDefault();
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
       });
+    }
+
+    add(menuProduct){
+      // const thisCart = this;
+      console.log('adding product', menuProduct);
     }
   }
 
@@ -279,7 +290,7 @@
 
     initMenu: function(){
       const thisApp = this;
-      console.log('thisApp.data:', thisApp.data);
+      console.log('initMenu 2 ', thisApp.data);
       for(let productData in thisApp.data.products){
         new Product (productData, thisApp.data.products[productData]);
       }
@@ -288,12 +299,12 @@
     initCart: function(){
       const thisApp = this;
       const cartElement = document.querySelector(select.containerOf.cart);
-      thisApp.cart = new Cart(cartElement);
+      thisApp.cart = new Cart(cartElement); // w app.cart zapisujemy instancję klasy Cart
     },
 
     init: function(){
       const thisApp = this;
-      console.log('*** App starting ***');
+      console.log('*** App.init 1 ***');
       thisApp.initData();
       thisApp.initMenu();
       thisApp.initCart();
