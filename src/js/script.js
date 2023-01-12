@@ -98,6 +98,7 @@
       console.log('new Product 3 ', thisProduct);
       thisProduct.initAmountWidget();
       thisProduct.processOrder();
+      thisProduct.prepareCartProductParams();
     }
 
     initAmountWidget(){
@@ -190,16 +191,65 @@
         }
       }
 
+      thisProduct.priceSingle = price;
+
       //multiply price by amount
       price *= thisProduct.amountWidget.value;
+      thisProduct.priceMulti = price;
 
       //update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
-    }
+    } 
 
     addToCart(){
       const thisProduct = this;
-      app.cart.add(thisProduct); // w app.cart zapisaliśmy instancję klasy Cart
+      app.cart.add(thisProduct.prepareCartProduct()); // w app.cart zapisaliśmy instancję klasy Cart
+    }
+
+    prepareCartProduct(){
+      const thisProduct = this;
+      const productSummary = {
+        id: thisProduct.id,
+        name: thisProduct.data.name,
+        amount: thisProduct.amountWidget.value,
+        priceSingle: thisProduct.priceSingle,
+        price : thisProduct.priceMulti
+      };
+      return productSummary;
+    }
+
+    prepareCartProductParams(){
+      const thisProduct = this;
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      const params = {};
+
+      // for each category (param) 
+      for(let paramId in thisProduct.data.params){
+        const param = thisProduct.data.params[paramId];
+
+        // create category (param) in const params eg. params = {ingredients: {name: 'Ingredients', options: {}}
+    
+        params[paramId] = {
+          label: param.label,
+          options: {}
+        };
+
+        // for each option in this category (param)
+        for(let optionId in param.options){
+          const option = param.options[optionId];
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+          if(optionSelected){
+            const paramIdObject = {
+              label: paramId, // np. Sauce: sauce
+              options: {      
+                optionId: option.label // np. tomato : Tomato
+              }
+            };
+            params.paramId = paramIdObject;
+          } 
+        }
+      }
+      return params;
     }
   }
 
@@ -220,6 +270,7 @@
       thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
       thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
     }
+
     setValue(value){
       const thisWidget = this;
       const newValue = parseInt(value);
@@ -229,6 +280,7 @@
       thisWidget.input.value = thisWidget.value;
       thisWidget.announce();
     }
+
     initActions(){
       const thisWidget = this;
       thisWidget.input.addEventListener('change', function(){
@@ -243,6 +295,7 @@
         thisWidget.setValue(thisWidget.value + 1);
       });
     }
+    
     announce(){
       const thisWidget = this;
       const event = new Event('updated');
