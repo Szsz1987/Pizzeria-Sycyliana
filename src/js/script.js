@@ -213,7 +213,8 @@
         name: thisProduct.data.name,
         amount: thisProduct.amountWidget.value,
         priceSingle: thisProduct.priceSingle,
-        price : thisProduct.priceMulti
+        price : thisProduct.priceMulti,
+        params: thisProduct.prepareCartProductParams()
       };
       return productSummary;
     }
@@ -239,13 +240,7 @@
           const option = param.options[optionId];
           const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
           if(optionSelected){
-            const paramIdObject = {
-              label: paramId, // np. Sauce: sauce
-              options: {      
-                optionId: option.label // np. tomato : Tomato
-              }
-            };
-            params.paramId = paramIdObject;
+            params[paramId].options[optionId] = option.label;
           } 
         }
       }
@@ -318,6 +313,7 @@
       thisCart.dom = {};
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger); //short bar in the header
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
     }
 
     initActions(){
@@ -329,7 +325,10 @@
     }
 
     add(menuProduct){
-      // const thisCart = this;
+      const thisCart = this;
+      const generatedHTML = templates.cartProduct(menuProduct);
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+      thisCart.dom.productList.appendChild(generatedDOM);
       console.log('adding product', menuProduct);
     }
   }
