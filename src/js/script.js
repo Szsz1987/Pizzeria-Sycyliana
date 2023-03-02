@@ -118,16 +118,13 @@
     renderInMenu(){
       const thisProduct = this;
       const generatedHTML = templates.menuProduct(thisProduct.data);
-      // === AmountWidget/constructor(element)
       thisProduct.element = utils.createDOMFromHTML(generatedHTML);
-      // === AmountWidget/constructor(element)
       const menuContainer = document.querySelector(select.containerOf.menu);
       menuContainer.appendChild(thisProduct.element);
     }
 
     getElements(){
       const thisProduct = this;
-
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
@@ -173,7 +170,6 @@
       let price = thisProduct.data.price;
       for(let paramId in thisProduct.data.params){
         const param = thisProduct.data.params[paramId];
-
         for(let optionId in param.options){
           const option = param.options[optionId];
           const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
@@ -234,7 +230,6 @@
         const param = thisProduct.data.params[paramId];
 
         // create category (param) in const params eg. params = {ingredients: {name: 'Ingredients', options: {}}
-    
         params[paramId] = {
           label: param.label,
           options: {}
@@ -283,6 +278,7 @@
       const thisWidget = this;
       thisWidget.input.addEventListener('change', function(){
         thisWidget.setValue(thisWidget.input.value);
+        console.log('thisWidget.input.value', thisWidget.input.value)
       });
       thisWidget.linkDecrease.addEventListener('click', function(event){
         event.preventDefault();
@@ -366,6 +362,7 @@
       thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
       thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
       thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
+      thisCart.product.amount = product.amount;
     }
 
     add(menuProduct){
