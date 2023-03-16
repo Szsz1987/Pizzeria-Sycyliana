@@ -15,7 +15,7 @@ class Product {
     thisProduct.initAmountWidget();
     thisProduct.processOrder();
     thisProduct.prepareCartProductParams();
-    }
+  }
 
   initAmountWidget(){
     const thisProduct = this;
@@ -54,9 +54,9 @@ class Product {
       if(activeProduct != null && activeProduct != thisProduct.element){
         activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
       }
-        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
-      });
-    }
+      thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+    });
+  }
     
   initOrderForm(){
     const thisProduct = this;
@@ -88,13 +88,13 @@ class Product {
         if(optionSelected){
           if(!option.default == true){
             price += option.price;
-            }
+          }
         } else if(option.default == true){
           price -= option.price;
         }
           
         const image = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
-          if(image){
+        if(image){
           if(optionSelected){
             image.classList.add(classNames.menuProduct.imageVisible);
           } else {
@@ -160,4 +160,4 @@ class Product {
   }
 }
 
-  export default Product;
+export default Product;

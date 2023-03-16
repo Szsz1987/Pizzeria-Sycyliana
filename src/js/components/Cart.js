@@ -31,13 +31,13 @@ class Cart{
       event.preventDefault();
       thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
     });
-      thisCart.dom.productList.addEventListener('updated', function(){
+    thisCart.dom.productList.addEventListener('updated', function(){
       thisCart.update();
     });
-      thisCart.dom.productList.addEventListener('remove', function(event){
+    thisCart.dom.productList.addEventListener('remove', function(event){
       thisCart.remove(event.detail.cartProduct);
     });
-      thisCart.dom.form.addEventListener('submit', function(event){
+    thisCart.dom.form.addEventListener('submit', function(event){
       event.preventDefault();
       thisCart.sendOrder();
     });
@@ -107,11 +107,11 @@ class Cart{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      };
-      fetch(url, options);
-    }
+      },
+      body: JSON.stringify(payload),
+    };
+    fetch(url, options);
   }
+}
 
-  export default Cart;
+export default Cart;

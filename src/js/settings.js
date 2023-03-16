@@ -49,33 +49,33 @@ export const select = {
   },
 };
   
-  export const classNames = {
-    menuProduct: {
-      wrapperActive: 'active',
-      imageVisible: 'active',
-    },
-    cart: {
-      wrapperActive: 'active',
-    },
-  };
+export const classNames = {
+  menuProduct: {
+    wrapperActive: 'active',
+    imageVisible: 'active',
+  },
+  cart: {
+    wrapperActive: 'active',
+  },
+};
   
-  export const settings = {
-    amountWidget: {
-      defaultValue: 1,
-      defaultMin: 1,
-      defaultMax: 9,
-    },
-    cart: {
-      defaultDeliveryFee: 20,
-    },
-    db: {
-      url: '//localhost:3131',
-      products: 'products',
-      orders: 'ordes',
-    },
-  };
+export const settings = {
+  amountWidget: {
+    defaultValue: 1,
+    defaultMin: 1,
+    defaultMax: 9,
+  },
+  cart: {
+    defaultDeliveryFee: 20,
+  },
+  db: {
+    url: '//localhost:3131',
+    products: 'products',
+    orders: 'ordes',
+  },
+};
   
-  export const templates = {
-    menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
-    cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
-  };
+export const templates = {
+  menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
+  cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
+};
