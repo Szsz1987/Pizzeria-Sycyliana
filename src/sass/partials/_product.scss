@@ -1,12 +1,14 @@
 .product-list {
   padding: ($base-size * 3) 0;
 }
+
 .product {
   margin: ($base-size / 2) 0;
   padding: ($base-size * 6) ($base-size * 4);
   background: $color-light;
   border-bottom: 1px solid lighten($color-dark, 70%);
   border-radius: $radius;
+
   &__header {
     @include flex(row, center, space-between);
     margin-bottom: ($base-size * 2);
@@ -37,11 +39,13 @@
   &__description {
     color: lighten($color-dark, 10%);
   }
+
   &__wrapper {
     @include flex(row, center, space-between);
     @include accordion-closed();
     animation: flipdown 0.5s ease both;
   }
+
   &__params {
     margin: 0 0 ($base-size * 3) 0;
     padding: 0;
@@ -58,43 +62,52 @@
     opacity: 0;
     transition: opacity 200ms;
   }
+
   &__total-price {
     font-size: 14px;
     font-weight: $font-bold;
     text-transform: uppercase;
   }
+
   &__images {
     position: relative;
     width: 350px;
     height: 350px;
     opacity: 0;
     transition: opacity 200ms;
+
     &.small {
       width: 220px;
       height: 220px;
     }
+
     > img {
       @include center();
       height: auto;
       opacity: 0;
       transition: opacity 500ms;
+
       &.active {
         opacity: 1;
       }
     }
   }
+
   &.active {
     .product__wrapper {
       @include accordion-open();
     }
+
     .product__order, .product__images {
       opacity: 1;
     }
+    
     .product__icon {
       transform: rotate(180deg);
     }
   }
 }
+
 .widget-amount {
   input {
     width: 30px;

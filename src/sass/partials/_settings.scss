@@ -29,6 +29,7 @@ $base-size: 12px;
   text-decoration: none;
   text-transform: uppercase;
   text-align: center;
+
   &:hover {
     background: lighten($btn-bg, 3%);
   }
@@ -40,18 +41,21 @@ $base-size: 12px;
   }
   // CODE ADDED END
 }
+
 @mixin flex($flex-direction, $align-items, $justify-content) {
   display: flex;
   flex-direction: $flex-direction;
   align-items: $align-items;
   justify-content: $justify-content;
 }
+
 @mixin center() {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
 @mixin accordion-closed() {
   position: relative;
   overflow: hidden;
@@ -59,6 +63,7 @@ $base-size: 12px;
   max-height: 0;
   transform: translate(0, 50%);
 }
+
 @mixin accordion-open() {
   transform: translate(0, 0);
   max-height: 1000px;
@@ -69,24 +74,30 @@ $base-size: 12px;
   margin: 0;
   padding: 0;
 }
+
 @keyframes flipdown {
   0% {
     opacity: 0;
     transform-origin: top center;
     transform: rotateX(-90deg);
   }
+
   5% {
     opacity: 1;
   }
+
   80% {
     transform: rotateX(8deg);
   }
+
   83% {
     transform: rotateX(6deg);
   }
+
   92% {
     transform: rotateX(-3deg);
   }
+  
   100% {
     transform-origin: top center;
     transform: rotateX(0deg);
