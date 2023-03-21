@@ -3,10 +3,24 @@ export const select = {
   templateOf: {
     menuProduct: '#template-menu-product',
     cartProduct: '#template-cart-product', 
+    bookingWidget: '#template-booking-widget',
   },
   containerOf: {
     menu: '#product-list',
     cart: '#cart',
+    pages: '#pages',
+    booking: '.booking-wrapper',
+  },
+  widgets: {
+    datePicker: {
+      wrapper: '.date-picker',
+      input: `input[name="date"]`,
+    },
+    hourPicker: {
+      wrapper: '.hour-picker',
+      input: 'input[type="range"]',
+      output: '.output',
+    },
   },
   all: {
     menuProducts: '#product-list > .product',
@@ -28,7 +42,6 @@ export const select = {
       linkIncrease: 'a[href="#more"]',
     },
   },
-
   cart: {
     productList: '.cart__order-summary',
     toggleTrigger: '.cart__summary',
@@ -41,6 +54,14 @@ export const select = {
     phone: '[name="phone"]',
     address: '[name="address"]',
   },
+  booking: {
+    peopleAmount: '.people amount',
+    hoursAmount: 'hours-amount',
+    tables: '.floor-plan .table',
+  },
+  nav: {
+  links: '.main-nav a',
+},
   cartProduct: {
     amountWidget: '.widget-amount',
     price: '.cart__product-price',
@@ -57,25 +78,52 @@ export const classNames = {
   cart: {
     wrapperActive: 'active',
   },
+  booking: {
+    loading: 'loading',
+    tableBooked: 'booked',
+  },
+  nav: {
+    active: 'active',
+  },
+  pages: {
+    active: 'active',
+  },
 };
   
 export const settings = {
+  hours: {
+    open: 12,
+    close: 24,
+  },
   amountWidget: {
     defaultValue: 1,
     defaultMin: 1,
     defaultMax: 9,
   },
+  datePicker: {
+    maxDaysinFuture: 14,
+  },
   cart: {
     defaultDeliveryFee: 20,
+  },
+  booking: {
+    tableIdAtrribute: 'data-table',
   },
   db: {
     url: '//localhost:3131',
     products: 'products',
     orders: 'ordes',
+    booking: 'booking',
+    event: 'event',
+    dateStartParamKey: 'date_gte',
+    dateEndParamKey: 'date_lte',
+    notRepeatParam: 'repeat=false',
+    repeatParam: 'repeat_ne=false',
   },
 };
   
 export const templates = {
   menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
+  bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
 };
