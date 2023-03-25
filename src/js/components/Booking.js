@@ -15,9 +15,7 @@ class Booking{
     thisBooking.dom.wrapper = element;
     thisBooking.dom.peopleAmount = document.querySelector(select.booking.peopleAmount);
     thisBooking.dom.hoursAmount = document.querySelector(select.booking.hoursAmount);
-    console.log(thisBooking.dom.hoursAmount = document.querySelector(select.booking.hoursAmount));
     thisBooking.dom.wrapper.innerHTML = generatedHTML;
-
   }
 
   initWidgets(){
@@ -25,7 +23,9 @@ class Booking{
     thisBooking.peopleAmountWidget = new AmountWidget(thisBooking.dom.peopleAmount);
     thisBooking.dom.peopleAmount.addEventListener('click', function(){
     });
-    //thisBooking
+    thisBooking.hoursAmountWidget = new AmountWidget(thisBooking.dom.hoursAmount);
+    thisBooking.dom.hoursAmount.addEventListener('click', function(){
+    });
   }
 }
 
