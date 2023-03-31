@@ -1,5 +1,4 @@
 import {templates,select} from './../settings.js';
-//import utils from './../utils.js';
 import AmountWidget from './AmountWidget.js';
 
 class Booking{
@@ -13,9 +12,9 @@ class Booking{
     const generatedHTML = templates.bookingWidget();
     thisBooking.dom = {};
     thisBooking.dom.wrapper = element;
-    thisBooking.dom.peopleAmount = document.querySelector(select.booking.peopleAmount);
-    thisBooking.dom.hoursAmount = document.querySelector(select.booking.hoursAmount);
     thisBooking.dom.wrapper.innerHTML = generatedHTML;
+    thisBooking.dom.peopleAmount = thisBooking.dom.wrapper.querySelector(select.booking.peopleAmount);
+    thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.booking.hoursAmount);
   }
 
   initWidgets(){
@@ -26,6 +25,7 @@ class Booking{
     thisBooking.hoursAmountWidget = new AmountWidget(thisBooking.dom.hoursAmount);
     thisBooking.dom.hoursAmount.addEventListener('click', function(){
     });
+
   }
 }
 

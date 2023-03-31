@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
   <header class="header">
     <div class="container">
       <div class="header__wrapper">
@@ -58,19 +57,14 @@
       </div>
     </div>
   </header>
-
   <div id="pages">
     <section id="order">
-      <div id="product-list" class="product-list container">
-
-      </div>
+      <div id="product-list" class="product-list container"></div>
     </section>
     <section id="booking">
-      <div class="booking-wrapper container">
-      </div>
+      <div class="booking-wrapper container"></div>
     </section>
   </div>
-
   <script id="template-booking-widget" type="text/x-handlebars-template">
     <div class="booking-widget">
       <h2 class="page__title no-spacing">Book a table</h2>
@@ -136,7 +130,6 @@
       </form>
     </div>
   </script>
-
   <script id="template-cart-product" type="text/x-handlebars-template">
     <li>
       <div class="widget-amount"> <!-- widget-amount -->
@@ -164,10 +157,8 @@
       </ul>
     </li>
   </script>
-
   <script id="template-menu-product" type="text/x-handlebars-template">
     <article class="product"> <!-- product -->
-
         <header class="product__header">
           <h3 class="product__name no-spacing">{{ name }} <i class="fas fa-chevron-down product__icon"></i></h3>
           <p class="product__base-price no-spacing">${{ price }}</p>
@@ -240,7 +231,6 @@
             {{/each}}
           </div>
         </div>
-
     </article> <!-- .product -->
   </script>
 

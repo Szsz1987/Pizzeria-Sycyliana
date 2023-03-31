@@ -36,7 +36,7 @@ header {
 .main-nav {
   position: absolute;
   @include flex(row, flex-start, flex-start);
-  bottom: ($base-size * -8);
+  top: ($base-size * 14);
 
   a {
     @extend .h2;
