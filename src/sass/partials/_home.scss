@@ -1,7 +1,65 @@
-.home-wrapper{
+.home-wrapper {
   margin: ($base-size * 3.5) auto;
   padding: ($base-size * 6) ($base-size * 4);
   background: $color-light;
   border-bottom: 1px solid lighten($color-dark, 70%);
   border-radius: $radius;
+}
+
+.home {
+
+
+  .options {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 700px;
+    text-align: center;
+
+    h2{
+      padding: 40px 0;
+      font-size: 30px;
+    }
+  }
+
+  .order-online {
+    background-image: url(../../images/homepage/pizza-1.jpg);
+    background-size: cover;
+    height: 180px;
+    width: 345px;
+    border-radius: 4%;
+    color: white;
+    cursor: pointer;
+  }
+
+  .book-a-table {
+    background-image: url(../../images/homepage/pizza-2.jpg);
+    background-size: cover;
+    width: 345px;
+    height: 180px;
+    border-radius: 4%;
+    color: white;
+    cursor: pointer;
+  }
+
+  .banner {
+    height: 180px;
+    border-radius: 4%;
+    width: 700px;
+    margin-top: 10px;
+    background-color: rgb(202, 69, 69);
+    text-align: center;
+    color: white;
+    padding: 15px 0;
+
+    h2{
+      font-size: 30px;
+    }
+
+    h4{
+      font-size: 18px;
+      padding: 0;
+    }
+  }
 }
